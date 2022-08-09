@@ -1,18 +1,11 @@
+// eslint-disable-next-line no-unused-vars
 import _ from 'lodash';
-import printMe from './print.js';
+import container from './modules/container.js';
+import './style.css';
 
- function component() {
-   const element = document.createElement('div');
-  const btn = document.createElement('button');
+const app = () => {
+  const main = document.getElementById('main');
+  main.append(container());
+};
 
-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = printMe;
-
-  element.appendChild(btn);
-
-   return element;
- }
-
- document.body.appendChild(component());
+app();
