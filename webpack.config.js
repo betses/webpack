@@ -9,7 +9,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      title: 'ToDo App',
       template: resolve(__dirname, './src/index.html'),
       minify: false,
     }),
