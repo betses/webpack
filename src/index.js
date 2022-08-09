@@ -1,12 +1,15 @@
 import _ from 'lodash';
 
-function component() {
-  const element = document.createElement('div');
+const toDoTasks = [
+  {
+    description: 'wash the dishes',
+    completed:  'false',
+    index: 0,
+  },
+  {
+    description: 'Complete the todo list project',
+    completed:  'false',
+    index: 1,
+  },
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  return element;
-}
-
-document.body.appendChild(component());
+]
