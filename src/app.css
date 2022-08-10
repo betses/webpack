@@ -1,4 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+  font-size: 18px;
+}
+
 body {
+  min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.05);
   padding: 0;
   margin: 0;
@@ -10,18 +24,40 @@ ul {
   margin: 0;
 }
 
-#todo {
+.todo-wrapper {
   width: 500px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 8px 0;
   margin: 32px auto 0;
   background-color: white;
-  list-style-type: none;
   border-radius: 4px;
+}
+
+#todo {
+  list-style-type: none;
+}
+
+li:focus,
+li:focus-within {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+
+li .delete-button {
+  position: absolute;
+  display: none;
+  right: 12px;
+  cursor: pointer;
+}
+
+li:focus .delete-button,
+li:focus-within .delete-button {
+  display: inline;
 }
 
 #todo li {
   padding: 16px;
+  position: relative;
+  display: flex;
 }
 
 #todo li + li {
@@ -32,9 +68,25 @@ ul {
   margin-right: 16px;
 }
 
-.title {
-  text-align: center;
-  font-size: large;
-  font-weight: 600;
-  margin-top: 80px;
+#task-input {
+  width: 100%;
+  border: none;
+  appearance: none;
+  padding: 16px;
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 1rem;
+}
+
+#task-input:focus,
+li input[type='text'] {
+  outline: none;
+}
+
+li input[type='text'] {
+  flex: 1 1 0%;
+  margin-right: 24px;
+  display: block;
+  border: none;
+  appearance: none;
+  background-color: transparent;
 }
