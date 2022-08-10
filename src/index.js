@@ -1,6 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-import css from './app.css';
-
 const todo = [
   {
     description: 'wash the dishes',
@@ -14,55 +11,56 @@ const todo = [
   },
 ];
 
-const loadTodo = (parent) => {
-  todo.sort((a, b) => a.index - b.index);
+class List {
+  loadTodo = (parent) => {
+    todo.sort((a, b) => a.index - b.index);
 
-  todo.forEach((task) => {
-    const el = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.id = `task-${task.index}`;
-    // eslint-disable-next-line no-use-before-define
-    checkbox.addEventListener('change', (event) => handleCheckbox(task, event));
+    todo.forEach((task) => {
+      const el = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = `task-${task.index}`;
+      checkbox.addEventListener('change', (event) => this.handleCheckbox(task, event));
 
-    const label = document.createElement('label');
-    label.innerText = task.description;
-    label.setAttribute('for', `task-${task.index}`);
+      const label = document.createElement('label');
+      label.innerText = task.description;
+      label.setAttribute('for', `task-${task.index}`);
 
-    if (task.completed) {
-      checkbox.setAttribute('checked', 'checked');
-      label.style.textDecoration = 'line-through';
-      label.style.color = '#070707';
+      if (task.completed) {
+        checkbox.setAttribute('checked', 'checked');
+        label.style.textDecoration = 'line-through';
+        label.style.color = '#070707';
+      }
+
+      el.appendChild(checkbox);
+      el.appendChild(label);
+      parent.appendChild(el);
+    });
+  };
+
+  render = () => {
+    const parent = document.querySelector('#todo');
+
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
     }
 
-    el.appendChild(checkbox);
-    el.appendChild(label);
-    parent.appendChild(el);
-  });
-};
+    this.loadTodo(parent);
+  };
 
-const render = () => {
-  const parent = document.querySelector('#todo');
+  handleCheckbox = (task, event) => {
+    const index = todo.findIndex((t) => task.index === t.index);
 
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
+    if (index === -1) {
+      return;
+    }
 
-  loadTodo(parent);
-};
+    todo[index].completed = event.target.checked;
 
-const handleCheckbox = (task, event) => {
-  const index = todo.findIndex((t) => task.index === t.index);
-
-  if (index === -1) {
-    return;
-  }
-
-  todo[index].completed = event.target.checked;
-
-  render();
-};
+    this.render();
+  };
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  render();
+  List.render();
 });
