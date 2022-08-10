@@ -1,96 +1,67 @@
-// eslint-disable-next-line no-unused-vars
-import css from './app.css';
-import Tasks from './tasks/Task.js';
+/* eslint-disable import/no-cycle */
+import Tasks from './modules/Tasks.js';
+
+import {
+  handleCheckbox,
+  handleEdit,
+  handleDelete,
+  handleTaskInput,
+  handleClear,
+} from './modules/task-updates.js';
 
 const tasks = new Tasks();
-class List {
-  handleEdit = (task, event) => {
-    tasks.editTask(task, event.target.value);
-  };
 
-  handleDelete = (task) => {
-    tasks.removeTask(task);
+const loadTodo = (parent) => {
+  const sortedTasks = tasks.getSortedTasks();
 
-    this.render();
-  };
+  sortedTasks.forEach((task) => {
+    const el = document.createElement('li');
+    el.setAttribute('tabindex', 0);
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `task-${task.index}`;
+    checkbox.addEventListener('change', (event) => handleCheckbox(tasks, task, event));
 
-  handleCheckbox = (task, event) => {
-    const index = tasks.tasks.findIndex((t) => task.index === t.index);
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = task.description;
+    input.addEventListener('keyup', (event) => handleEdit(tasks, task, event));
 
-    if (index === -1) {
-      return;
+    const deleteButton = document.createElement('span');
+    deleteButton.classList.add('delete-button', 'material-symbols-outlined');
+    deleteButton.innerText = 'delete';
+    deleteButton.addEventListener('click', () => handleDelete(tasks, task));
+
+    if (task.completed) {
+      checkbox.setAttribute('checked', 'checked');
+      input.style.textDecoration = 'line-through';
+      input.style.color = '#A3A3A3';
     }
 
-    tasks.tasks[index].completed = event.target.checked;
+    el.appendChild(checkbox);
+    el.appendChild(input);
+    el.appendChild(deleteButton);
+    parent.appendChild(el);
+  });
+};
 
-    // @todo: replace the affected element only?
-    this.render();
-  };
+const render = () => {
+  const parent = document.querySelector('#todo');
 
-  handleTaskInput = (event) => {
-    if (event.key !== 'Enter') return;
-
-    tasks.addTask({
-      description: event.target.value,
-      completed: false,
-      index: tasks.tasks.length,
-    });
-
-    event.target.value = '';
-
-    this.render();
-  };
-
-  loadTodo(parent) {
-    const sortedTasks = tasks.getSortedTasks();
-
-    sortedTasks.forEach((task) => {
-      const el = document.createElement('li');
-      el.setAttribute('tabindex', 0);
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.id = `task-${task.index}`;
-      checkbox.addEventListener('change', (event) => this.handleCheckbox(task, event));
-
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.value = task.description;
-      input.addEventListener('keyup', (event) => this.handleEdit(task, event));
-
-      const deleteButton = document.createElement('span');
-      deleteButton.classList.add('delete-button', 'material-symbols-outlined');
-      deleteButton.innerText = 'delete';
-      deleteButton.addEventListener('click', () => this.handleDelete(task));
-
-      if (task.completed) {
-        checkbox.setAttribute('checked', 'checked');
-        input.style.textDecoration = 'line-through';
-        input.style.color = '#A3A3A3';
-      }
-
-      el.appendChild(checkbox);
-      el.appendChild(input);
-      el.appendChild(deleteButton);
-      parent.appendChild(el);
-    });
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
   }
 
-  render = () => {
-    const parent = document.querySelector('#todo');
-
-    while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
-    }
-
-    this.loadTodo(parent);
-  };
-}
-
-const list = new List();
+  loadTodo(parent);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
-  document
-    .querySelector('#task-input')
-    .addEventListener('keyup', list.handleTaskInput);
-  list.render();
+  document.querySelector('#clearAllButton')
+    .addEventListener('click', () => handleClear(tasks));
+
+  document.querySelector('#task-input')
+    .addEventListener('keyup', (event) => handleTaskInput(tasks, event));
+
+  render();
 });
+export default render;
