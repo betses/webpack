@@ -45,6 +45,10 @@ class Tasks {
   clearCompletedTasks() {
     this.tasks = this.tasks.filter((task) => !task.completed);
 
+    this.tasks = this.tasks.map((task, index) => ({
+      ...task,
+      index,
+    }));
     this.updateLocalStorage();
   }
 }
