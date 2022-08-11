@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 import Tasks from './modules/Tasks.js';
+import './app.css';
 
 import {
   handleCheckbox,

@@ -4,9 +4,14 @@ const { resolve } = require('path');
 module.exports = {
   entry: './src/index.js',
   devtool: 'eval-source-map',
+  mode: 'development',
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: resolve(__dirname, 'dist'),
+    clean: true,
+  },
+  devServer: {
+    static: './dist',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -22,5 +27,11 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+  optimization: {
+    runtimeChunk: 'single',
+  },
+  performance: {
+    hints: false,
   },
 };
