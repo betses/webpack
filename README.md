@@ -12,10 +12,6 @@ ToDo App
   -CSS
   
 
-## Live Demo (if available)
-
-[Live Demo Link](https://livedemo.com)
-
 
 ## Getting Started
 
@@ -35,8 +31,8 @@ To get a local copy up and running follow these simple example steps.
 
 👤 **Author**
 
-- GitHub: [@githubhandle](https://github.com/betses)
-- Twitter: [@twitterhandle](https://twitter.com/betse_s)
+- GitHub: [@betses](https://github.com/betses)
+- Twitter: [@betse_s](https://twitter.com/betse_s)
 
 ## 🤝 Contributing
 
