@@ -10,13 +10,17 @@
     </title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<script defer src="main.js"></script></head>
+<script defer src="runtime.js"></script><script defer src="main.js"></script></head>
 
 <body>
     <div class="todo-wrapper">
         <input type="text" id="task-input" placeholder="Add to your list..." />
 
         <ul id="todo"></ul>
+
+        <p class="clearButtonWrapper">
+            <button type="button" id="clearAllButton">Clear All Completed</button>
+        </p>
     </div>
 </body>
 

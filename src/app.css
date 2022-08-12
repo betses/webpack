@@ -42,18 +42,6 @@ li:focus-within {
   background-color: rgba(255, 255, 0, 0.3);
 }
 
-li .delete-button {
-  position: absolute;
-  display: none;
-  right: 12px;
-  cursor: pointer;
-}
-
-li:focus .delete-button,
-li:focus-within .delete-button {
-  display: inline;
-}
-
 #todo li {
   padding: 16px;
   position: relative;
@@ -89,4 +77,27 @@ li input[type='text'] {
   border: none;
   appearance: none;
   background-color: transparent;
+}
+
+li .delete-button {
+  position: absolute;
+  display: none;
+  right: 12px;
+  cursor: pointer;
+}
+
+li:focus .delete-button,
+li:focus-within .delete-button {
+  display: inline;
+}
+
+#clearAllButton {
+  appearance: none;
+  border: none;
+  display: block;
+  text-align: center;
+  padding: 16px 0;
+  width: 100%;
+  outline: none;
+  color: gray;
 }
