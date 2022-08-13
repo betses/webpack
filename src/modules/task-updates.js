@@ -36,7 +36,7 @@ const handleTaskInput = (tasks, event) => {
   tasks.addTask({
     description: event.target.value,
     completed: false,
-    index: tasks.tasks.length,
+    index: tasks.tasks.length + 1,
   });
 
   event.target.value = '';

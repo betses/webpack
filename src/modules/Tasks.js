@@ -22,7 +22,7 @@ class Tasks {
 
     this.tasks = this.tasks.map((task, index) => ({
       ...task,
-      index,
+      index: index + 1,
     }));
 
     this.updateLocalStorage();
@@ -47,7 +47,7 @@ class Tasks {
 
     this.tasks = this.tasks.map((task, index) => ({
       ...task,
-      index,
+      index: index + 1,
     }));
     this.updateLocalStorage();
   }
