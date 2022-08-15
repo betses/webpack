@@ -11,7 +11,7 @@ ToDo App
   -JavaScript 
   -CSS
   
-  ## [Live Demo](https://betses.github.io/webpack/dist)
+  ## [Live Demo](https://betses.github.io/webpack/index.html)
   
 
 
