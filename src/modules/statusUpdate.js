@@ -4,19 +4,6 @@ import List from './list.js';
 const tasks = new Tasks();
 const lists = new List();
 class StatusUpdate {
-  handleCheckbox = (task, event) => {
-    const index = tasks.tasks.findIndex((t) => task.index === t.index);
-
-    if (index === -1) {
-      return;
-    }
-
-    tasks.tasks[index].completed = event.target.checked;
-
-    // @todo: replace the affected element only?
-    lists.render();
-  };
-
   loadTodo(parent) {
     const sortedTasks = tasks.getSortedTasks();
 

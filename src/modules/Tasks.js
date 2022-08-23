@@ -1,6 +1,9 @@
+import List from './list.js';
+
+const lists = new List();
 class Tasks {
   constructor() {
-    this.tasks = JSON.parse(window.localStorage.getItem('todo.tasks') || '[]');
+    this.tasks = JSON.parse(localStorage.getItem('todo.tasks') || '[]');
   }
 
   addTask(task) {
@@ -38,8 +41,20 @@ class Tasks {
     this.updateLocalStorage();
   }
 
+  handleCheckbox = (task, event) => {
+    const index = this.tasks.findIndex((t) => task.index === t.index);
+
+    if (index === -1) {
+      return;
+    }
+
+    this.tasks[index].completed = event.target.checked;
+    // @todo: replace the affected element only?
+    lists.render();
+  };
+
   updateLocalStorage() {
-    window.localStorage.setItem('todo.tasks', JSON.stringify(this.tasks));
+    localStorage.setItem('todo.tasks', JSON.stringify(this.tasks));
   }
 
   clearCompletedTasks() {

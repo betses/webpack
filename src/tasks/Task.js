@@ -1,6 +1,6 @@
 class Tasks {
   constructor() {
-    this.tasks = JSON.parse(window.localStorage.getItem('todo.tasks') || '[]');
+    this.tasks = JSON.parse(localStorage.getItem('todo.tasks') || '[]');
   }
 
   addTask(task) {
@@ -39,7 +39,7 @@ class Tasks {
   }
 
   updateLocalStorage() {
-    window.localStorage.setItem('todo.tasks', JSON.stringify(this.tasks));
+    localStorage.setItem('todo.tasks', JSON.stringify(this.tasks));
   }
 }
 
